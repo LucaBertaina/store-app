@@ -8,13 +8,15 @@ export const Login = () => {
 
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
 
   async function onSubmit(event: SyntheticEvent<HTMLFormElement>) {
     event.preventDefault()
+    setError('')
     const ok = await login({ user, password })
     if (!ok) {
-      console.log('Credenciales invalidas')
+      setError('Credenciales invalidas')
       return
     }
     navigate("/")
@@ -34,6 +36,7 @@ export const Login = () => {
         placeholder="ingresa tu pass" />
 
       <button type="submit">Ingresar</button>
+      {error ? <p>{error}</p> : null}
     </form>
   );
 };
